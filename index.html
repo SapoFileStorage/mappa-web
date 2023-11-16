@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/SuddivisioneTRATTE_1.js"></script>
+        <script src="data/hUBLOGISTICIEDIMPIANTI_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_SuddivisioneTRATTE_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? autolinker.link(feature.properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? autolinker.link(feature.properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? autolinker.link(feature.properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? autolinker.link(feature.properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? autolinker.link(feature.properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? autolinker.link(feature.properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? autolinker.link(feature.properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SuddivisioneTRATTE_1_0(feature) {
+            switch(String(feature.properties['Name'])) {
+                default:
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(97,217,135,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'INIZIO RIFACIMENTO PROPOSTO':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(240,34,171,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta A':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(236,54,38,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta B':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(213,56,221,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta C':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(145,125,227,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta D':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(205,179,63,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta E':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(40,145,231,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta F':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(201,229,87,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta G':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(119,139,238,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta H':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(91,206,172,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta I':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(72,201,65,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta L':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(163,84,220,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta M':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(134,221,229,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta N':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(239,20,85,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta O':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(223,122,39,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Subtratta P':
+                    return {
+                pane: 'pane_SuddivisioneTRATTE_1',
+                opacity: 1,
+                color: 'rgba(135,203,83,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_SuddivisioneTRATTE_1');
+        map.getPane('pane_SuddivisioneTRATTE_1').style.zIndex = 401;
+        map.getPane('pane_SuddivisioneTRATTE_1').style['mix-blend-mode'] = 'normal';
+        var layer_SuddivisioneTRATTE_1 = new L.geoJson(json_SuddivisioneTRATTE_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SuddivisioneTRATTE_1',
+            layerName: 'layer_SuddivisioneTRATTE_1',
+            pane: 'pane_SuddivisioneTRATTE_1',
+            onEachFeature: pop_SuddivisioneTRATTE_1,
+            style: style_SuddivisioneTRATTE_1_0,
+        });
+        bounds_group.addLayer(layer_SuddivisioneTRATTE_1);
+        map.addLayer(layer_SuddivisioneTRATTE_1);
+        function pop_hUBLOGISTICIEDIMPIANTI_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Impresa'] !== null ? autolinker.link(feature.properties['Impresa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipologia'] !== null ? autolinker.link(feature.properties['Tipologia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_hUBLOGISTICIEDIMPIANTI_2_0() {
+            return {
+                pane: 'pane_hUBLOGISTICIEDIMPIANTI_2',
+                radius: 7.33334,
+                opacity: 1,
+                color: 'rgba(184,8,8,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,8,8,1.0)',
+                interactive: true,
+            }
+        }
+        function style_hUBLOGISTICIEDIMPIANTI_2_1() {
+            return {
+                pane: 'pane_hUBLOGISTICIEDIMPIANTI_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_hUBLOGISTICIEDIMPIANTI_2');
+        map.getPane('pane_hUBLOGISTICIEDIMPIANTI_2').style.zIndex = 402;
+        map.getPane('pane_hUBLOGISTICIEDIMPIANTI_2').style['mix-blend-mode'] = 'normal';
+        var layer_hUBLOGISTICIEDIMPIANTI_2 = new L.geoJson.multiStyle(json_hUBLOGISTICIEDIMPIANTI_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_hUBLOGISTICIEDIMPIANTI_2',
+            layerName: 'layer_hUBLOGISTICIEDIMPIANTI_2',
+            pane: 'pane_hUBLOGISTICIEDIMPIANTI_2',
+            onEachFeature: pop_hUBLOGISTICIEDIMPIANTI_2,
+            pointToLayers: [function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_hUBLOGISTICIEDIMPIANTI_2_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_hUBLOGISTICIEDIMPIANTI_2_1(feature));
+            },
+        ]});
+        bounds_group.addLayer(layer_hUBLOGISTICIEDIMPIANTI_2);
+        map.addLayer(layer_hUBLOGISTICIEDIMPIANTI_2);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        setBounds();
+        var i = 0;
+        layer_hUBLOGISTICIEDIMPIANTI_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Tipologia'] !== null?String('<div style="color: #000000; font-size: 6pt; font-weight: bold; font-family: \'Century Gothic\', sans-serif;">' + layer.feature.properties['Tipologia']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_hUBLOGISTICIEDIMPIANTI_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_hUBLOGISTICIEDIMPIANTI_2]);
+        map.on("zoomend", function(){
+            resetLabels([layer_hUBLOGISTICIEDIMPIANTI_2]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_hUBLOGISTICIEDIMPIANTI_2]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_hUBLOGISTICIEDIMPIANTI_2]);
+        });
+        </script>
+    </body>
+</html>
